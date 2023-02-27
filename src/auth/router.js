@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { login, signUp, deleteUser } = require('./controller');
+const { login, register, deleteUser } = require('./controller');
 
 router
     .post('/login', login)
-    .post('/signup', signUp)
+    .post('/register', register)
     .delete('/:id', deleteUser)
 
 module.exports = router;

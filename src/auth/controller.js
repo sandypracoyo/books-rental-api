@@ -7,7 +7,7 @@ const { SECRET_KEY } = process.env
 
 const login = (req, res) => {
     const { username, password } = req.body
-    const user = userService.getUserByUsername(username);
+    const user = userService.getUserByUsername(username, password);
 
     if(!username || !password){
         util.send(res, 403, false, 'Username or Password cannot blank !', null);
@@ -26,7 +26,7 @@ const login = (req, res) => {
     util.send(res, 200, true, null, data);
 }
 
-const signUp = (req, res) => {
+const register = (req, res) => {
     const { username, password } = req.body
     if(!username || !password){
         res.send('Username or password field cannot blank !');
@@ -59,6 +59,6 @@ const deleteUser = (req, res) => {
 
 module.exports = {
     login,
-    signUp,
+    register,
     deleteUser
 }

@@ -1,8 +1,8 @@
 const database = require('../../database.json');
 const { saveToDatabase } = require('../../utils/utils');
 
-const getUserByUsername = (username) => {
-    return database.users.find((e) => e.username === username);
+const findByName = (name, password) => {
+    return database.users.find((e) => e.username === name && e.password === password);
 }
 
 const createNewUser = (newUser) => {
@@ -30,7 +30,7 @@ const deleteUser = (id) => {
 }
 
 module.exports = {
-    getUserByUsername,
+    findByName,
     createNewUser,
     deleteUser
 }

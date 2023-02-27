@@ -1,8 +1,8 @@
 const database = require('./database');
 const nanoid = require('nanoid');
 
-const getUserByUsername = (username) => {
-    return database.getUserByUsername(username);
+const getUserByUsername = (username, password) => {
+    return database.findByName(username, password);
 }
 
 const createNewUser = (newUser) => {

@@ -3,10 +3,10 @@ const rateLimit = require('express-rate-limit');
 
 const app = express();
 const port = 3000;
-const userRouter = require('./src/users/router');
+const authRouter = require('./src/auth/router');
 
 app.use(express.json());
-app.use('/user', userRouter);
+app.use('/auth', authRouter);
 
 app.get('*', (req,res)=>{
     res.send('Error not found')
