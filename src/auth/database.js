@@ -1,8 +1,8 @@
 const database = require('../../database.json');
 const { saveToDatabase } = require('../../utils/utils');
 
-const findByName = (name, password) => {
-    return database.users.find((e) => e.username === name && e.password === password);
+const findByName = (name) => {
+    return database.users.find((e) => e.username === name);
 }
 
 const createNewUser = (newUser) => {

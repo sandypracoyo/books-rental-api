@@ -1,14 +1,14 @@
 const database = require('./database');
 const nanoid = require('nanoid');
 
-const getUserByUsername = (username, password) => {
-    return database.findByName(username, password);
+const getUserByUsername = (username) => {
+    return database.findByName(username);
 }
 
 const createNewUser = (newUser) => {
     const newUserCreate = {
-        ...newUser,
         id: nanoid(18),
+        ...newUser,
         createdAt: new Date(),
         updatedAt : new Date()
     }

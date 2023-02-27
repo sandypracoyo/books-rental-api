@@ -1,24 +1,24 @@
 require('dotenv').config({ path: '.env' });
 const jwt = require('jsonwebtoken');
 const userService = require('./service');
+const bcrypt = require('bcryptjs');
 const util = require('../../utils/utils');
 
-const { SECRET_KEY } = process.env
+const { SECRET_KEY, SALT } = process.env
 
 const login = (req, res) => {
     const { username, password } = req.body
-    const user = userService.getUserByUsername(username, password);
+    const user = userService.getUserByUsername(username);
 
     if(!username || !password){
         util.send(res, 403, false, 'Username or Password cannot blank !', null);
         return
     }
 
-    if(!user){
+    if(!bcrypt.compareSync(password, user.password)){
         util.send(res, 403, false, 'Username or Password is false !', null)
         return
     }
-
     const token = jwt.sign({id : user.id, user: user.username}, SECRET_KEY);
     const data = {
         access_token: token
@@ -32,9 +32,10 @@ const register = (req, res) => {
         res.send('Username or password field cannot blank !');
         return
     }
+    const salt = bcrypt.genSaltSync(10)
     const newUser = {
         username: username,
-        password: password
+        password: bcrypt.hashSync(password, salt)
     }
     try {
         const createNewUser = userService.createNewUser(newUser);
