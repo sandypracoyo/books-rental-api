@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "jest2123",
+      "id": "Ug2p-Om753mR2OeCXa",
+      "createdAt": "2023-02-27T17:05:09.975Z",
+      "updatedAt": "2023-02-27T17:05:09.975Z"
+    },
+    {
+      "username": "sandy",
+      "password": "jest2123",
+      "id": "TBXCLFS9cj3PiOejZJ",
+      "createdAt": "2023-02-27T17:48:50.443Z",
+      "updatedAt": "2023-02-27T17:48:50.443Z"
+    },
+    {
+      "username": "dev",
+      "password": "jest2123",
+      "id": "XTSYbo7dgV5XP0Ys95",
+      "createdAt": "2023-02-27T17:49:20.540Z",
+      "updatedAt": "2023-02-27T17:49:20.540Z"
+    },
+    {
+      "username": "devs",
+      "password": "jest2123",
+      "id": "vXJ-5gO3Odih2Kq2wh",
+      "createdAt": "2023-02-27T17:49:48.519Z",
+      "updatedAt": "2023-02-27T17:49:48.519Z"
+    }
+  ]
+}
