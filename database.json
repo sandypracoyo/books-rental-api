@@ -13,6 +13,14 @@
       "password": "$2a$10$inj1CDOPGU3b1kZwI.bBouGJymt7sRiF3TdBF8pKg3PMaII2ohYxW",
       "createdAt": "2023-02-27T22:17:30.547Z",
       "updatedAt": "2023-02-27T22:17:30.547Z"
+    },
+    {
+      "id": "BMqgAu6BIj_OM5Iz8N",
+      "username": "devsndycool",
+      "password": "$2a$10$n2VSxzUFTNfoJ9L1d99uaeGRcK9ziFq5UKIwnxo85wVM.Y8yyZ8s2",
+      "createdAt": "2023-02-27T22:34:25.796Z",
+      "updatedAt": "2023-02-27T22:34:25.796Z",
+      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkJNcWdBdTZCSWpfT001SXo4TiIsInVzZXIiOiJkZXZzbmR5Y29vbCIsImlhdCI6MTY3NzU0NTI2MX0.9EBZqLuKzhiZ1IqYaw25qsmEX2D_scbSN-ciYgPwU3w"
     }
   ]
 }

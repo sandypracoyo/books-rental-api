@@ -5,32 +5,17 @@ const findByName = (name) => {
     return database.users.find((e) => e.username === name);
 }
 
-const createNewUser = (newUser) => {
-    const isAlreadyExist = database.users.findIndex((e) => e.username === newUser.username) > -1
-    if(isAlreadyExist){
-        return 'already_exist';
-    }
+const saveRefreshToken = (id, refreshToken) => {
     try {
-        database.users.push(newUser);
+        const findIndexUser = database.users.findIndex((e) => e.id === id);
+        database.users[findIndexUser]['refreshToken'] = refreshToken
         saveToDatabase(database);
-        return newUser
     } catch (error) {
         throw { status : 500, message: 'internal server error'}
     }
 }
 
-const deleteUser = (id) => {
-    const findUserDelete = database.users.findIndex((e) => e.id === id);
-    if(findUserDelete === -1){
-        return 'not_found';
-    }
-    console.log(findUserDelete);
-    database.users.splice(findUserDelete);
-    saveToDatabase(database);
-}
-
 module.exports = {
     findByName,
-    createNewUser,
-    deleteUser
+    saveRefreshToken
 }
