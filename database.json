@@ -28,7 +28,86 @@
       "password": "$2a$10$Y0JSSqQWJ9mPFXPYxhDc2uUKyIJPJtOn5axHbJ/uccVx4pKZclNXW",
       "createdAt": "2023-03-02T12:39:55.893Z",
       "updatedAt": "2023-03-02T12:39:55.893Z",
-      "refreshToken": ""
+      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkF0bHZyaUlIa2wweF9oQVZDWCIsInVzZXIiOiJnYWJyaWFsIiwiaWF0IjoxNjc3NzcyMzAyfQ.4mGmYU23rglA6f6DZpPxV9ZGyFHFTl9r0j_ScpoMs-o"
+    }
+  ],
+  "books": [
+    {
+      "id": "Xn1huC9qb7EuyOEi_kn",
+      "isbn": "978-1-4028-9462-6",
+      "title": "Dasar pemrograman php",
+      "imageAsset": "http://localhost:3000/books/image/file-1677774173358-594960136.jpeg",
+      "sinopsis": "lorem ipsum",
+      "genre": "teknologi",
+      "qty": "3",
+      "createdAt": "2023-03-02T16:22:53.369Z",
+      "updatedAt": "2023-03-02T16:22:53.369Z"
+    },
+    {
+      "id": "UGrIi-J3FXbuS_DHvrU",
+      "isbn": "978-1-4028-9462-6",
+      "title": "Dasar pemrograman php",
+      "imageAsset": "http://localhost:3000/books/image/file-1677774319766-420750453.jpeg",
+      "sinopsis": "lorem ipsum",
+      "genre": "teknologi",
+      "qty": "3",
+      "createdAt": "2023-03-02T16:25:19.777Z",
+      "updatedAt": "2023-03-02T16:25:19.777Z"
+    },
+    {
+      "id": "gnx9wDjEG5SJD5cVRFI",
+      "isbn": "978-1-4028-9462-6",
+      "title": "Dasar pemrograman php",
+      "imageAsset": "http://localhost:3000/books/image/file-1677774320407-410643191.jpeg",
+      "sinopsis": "lorem ipsum",
+      "genre": "teknologi",
+      "qty": "3",
+      "createdAt": "2023-03-02T16:25:20.418Z",
+      "updatedAt": "2023-03-02T16:25:20.418Z"
+    },
+    {
+      "id": "HQkJ84PgY1ysykIcTYT",
+      "isbn": "978-1-4028-9462-6",
+      "title": "Dasar pemrograman php",
+      "imageAsset": "http://localhost:3000/books/image/file-1677774321026-458565990.jpeg",
+      "sinopsis": "lorem ipsum",
+      "genre": "teknologi",
+      "qty": "3",
+      "createdAt": "2023-03-02T16:25:21.037Z",
+      "updatedAt": "2023-03-02T16:25:21.037Z"
+    },
+    {
+      "id": "-PwdZ-1sxWg9VkCoAf9",
+      "isbn": "978-1-4028-9462-6",
+      "title": "Dasar pemrograman php",
+      "imageAsset": "http://localhost:3000/books/image/file-1677774321767-23152061.jpeg",
+      "sinopsis": "lorem ipsum",
+      "genre": "teknologi",
+      "qty": "3",
+      "createdAt": "2023-03-02T16:25:21.776Z",
+      "updatedAt": "2023-03-02T16:25:21.776Z"
+    },
+    {
+      "id": "posixj8cMPjtExIGMin",
+      "isbn": "978-1-4028-9462-6",
+      "title": "Dasar pemrograman php",
+      "imageAsset": "http://localhost:3000/books/image/file-1677774325214-119878415.jpeg",
+      "sinopsis": "lorem ipsum",
+      "genre": "teknologi",
+      "qty": "3",
+      "createdAt": "2023-03-02T16:25:25.225Z",
+      "updatedAt": "2023-03-02T16:25:25.225Z"
+    },
+    {
+      "id": "cR3FFUVlAU9eeSMYVsZ",
+      "isbn": "978-1-4028-9462-6",
+      "title": "Dasar pemrograman php",
+      "imageAsset": "http://localhost:3000/books/image/file-1677774327593-618682157.jpeg",
+      "sinopsis": "lorem ipsum",
+      "genre": "teknologi",
+      "qty": "3",
+      "createdAt": "2023-03-02T16:25:27.605Z",
+      "updatedAt": "2023-03-02T16:25:27.605Z"
     }
   ]
 }
