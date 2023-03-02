@@ -1,21 +1,26 @@
 const database = require('../../database.json');
 const { saveToDatabase } = require('../../utils/utils');
 
-const findByName = (name) => {
+exports.findByName = (name) => {
     return database.users.find((e) => e.username === name);
 }
 
-const saveRefreshToken = (id, refreshToken) => {
+exports.saveRefreshToken = (id, refreshToken) => {
     try {
         const findIndexUser = database.users.findIndex((e) => e.id === id);
         database.users[findIndexUser]['refreshToken'] = refreshToken
         saveToDatabase(database);
     } catch (error) {
-        throw { status : 500, message: 'internal server error'}
+        return error
     }
 }
 
-module.exports = {
-    findByName,
-    saveRefreshToken
+exports.deleteRefreshToken = (id) => {
+    try {
+        const findIndexUser = database.users.findIndex((e) => e.id === id)
+        database.users[findIndexUser]['refreshToken'] = ''
+        saveToDatabase(database)
+    } catch (error) {
+        return error
+    }
 }

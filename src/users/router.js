@@ -4,7 +4,7 @@ const auth = require('../../middlewares/authentication');
 const { register } = require('./controller');
 
 router
-    .post('/', auth, register)
+    .post('/', register)
     .put('/:idUser/assign-as-admin')
 
 module.exports = router;

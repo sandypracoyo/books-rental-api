@@ -1,16 +1,13 @@
 const database = require('./database');
 
-const getUserByUsername = (username) => {
+exports.getUserByUsername = (username) => {
     return database.findByName(username);
 }
 
-const saveRefreshToken = (id, refreshToken) => {
-    console.log(refreshToken);
-    console.log(id);
+exports.saveRefreshToken = (id, refreshToken) => {
     return database.saveRefreshToken(id, refreshToken)
 }
 
-module.exports = {
-    getUserByUsername,
-    saveRefreshToken
+exports.deleteRefreshToken = (id) => {
+    return database.deleteRefreshToken(id)
 }

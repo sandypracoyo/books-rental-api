@@ -3,11 +3,13 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const authRouter = require('./src/auth/router');
+const bookRouter = require('./src/books/router');
 const userRouter = require('./src/users/router');
 
 app.use(express.json());
 
-app.use('/auth', authRouter);
+app.use('/', authRouter);
+app.use('/books', bookRouter);
 app.use('/users', userRouter);
 
 app.get('*', (req,res)=>{

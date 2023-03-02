@@ -1,5 +1,8 @@
 const express = require('express');
+const auth = require('../../middlewares/authentication');
 const router = express.Router();
-const {} = require('./controller');
+const { getAllBooks } = require('./controller');
 
-router.get('', )
+router.get('/', auth, getAllBooks);
+
+module.exports = router
