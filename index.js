@@ -5,12 +5,14 @@ const port = 3000;
 const authRouter = require('./src/auth/router');
 const bookRouter = require('./src/books/router');
 const userRouter = require('./src/users/router');
+const transactionRouter = require('./src/transactions/routes');
 
 app.use(express.json());
 
 app.use('/', authRouter);
 app.use('/books', bookRouter);
 app.use('/users', userRouter);
+app.use('/transaction', transactionRouter);
 
 app.get('*', (req,res)=>{
     res.send('Error not found')

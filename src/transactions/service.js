@@ -1,5 +1,5 @@
 
 
-exports.addTransaction = ( ) => {
+exports.addTransaction = (idUser, books) => {
     
 }

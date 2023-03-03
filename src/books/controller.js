@@ -48,7 +48,7 @@ exports.addBook = (req, res) => {
         imageAsset: `http://localhost:3000/books/image/${filename}`,
         sinopsis: sinopsis,
         genre: genre,
-        qty: qty
+        qty: parseInt(qty)
     }
 
     bookService.saveBooks(dataToSave);
