@@ -28,7 +28,7 @@
       "password": "$2a$10$Y0JSSqQWJ9mPFXPYxhDc2uUKyIJPJtOn5axHbJ/uccVx4pKZclNXW",
       "createdAt": "2023-03-02T12:39:55.893Z",
       "updatedAt": "2023-03-02T12:39:55.893Z",
-      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkF0bHZyaUlIa2wweF9oQVZDWCIsInVzZXIiOiJnYWJyaWFsIiwiaWF0IjoxNjc3NzcyMzAyfQ.4mGmYU23rglA6f6DZpPxV9ZGyFHFTl9r0j_ScpoMs-o"
+      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkF0bHZyaUlIa2wweF9oQVZDWCIsInVzZXIiOiJnYWJyaWFsIiwiaWF0IjoxNjc3ODU1OTMwfQ.gcj3CiIsaoPPNezNx05Uf_R8a9eu28-eyh1V7sQFTZM"
     }
   ],
   "books": [
@@ -86,28 +86,6 @@
       "qty": "3",
       "createdAt": "2023-03-02T16:25:21.776Z",
       "updatedAt": "2023-03-02T16:25:21.776Z"
-    },
-    {
-      "id": "posixj8cMPjtExIGMin",
-      "isbn": "978-1-4028-9462-6",
-      "title": "Dasar pemrograman php",
-      "imageAsset": "http://localhost:3000/books/image/file-1677774325214-119878415.jpeg",
-      "sinopsis": "lorem ipsum",
-      "genre": "teknologi",
-      "qty": "3",
-      "createdAt": "2023-03-02T16:25:25.225Z",
-      "updatedAt": "2023-03-02T16:25:25.225Z"
-    },
-    {
-      "id": "cR3FFUVlAU9eeSMYVsZ",
-      "isbn": "978-1-4028-9462-6",
-      "title": "Dasar pemrograman php",
-      "imageAsset": "http://localhost:3000/books/image/file-1677774327593-618682157.jpeg",
-      "sinopsis": "lorem ipsum",
-      "genre": "teknologi",
-      "qty": "3",
-      "createdAt": "2023-03-02T16:25:27.605Z",
-      "updatedAt": "2023-03-02T16:25:27.605Z"
     }
   ]
 }

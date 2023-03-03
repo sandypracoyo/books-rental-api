@@ -2,12 +2,10 @@ const util = require('../../utils/utils');
 const path = require('path');
 const bookService = require('./service');
 
-exports.getAllBooks = (req, res) => {
-    util.send(res, 200, true, 'Path url getAllBooks', null);
-}
-
-exports.getBookById = (req, res) => {
-
+exports.getBooks = (req, res) => {
+    const { page, limit } = req.query
+    const dataBooks = bookService.getBooks(page, limit)
+    util.send(res, 200, true, 'Success retrieve books', dataBooks);
 }
 
 exports.addBook = (req, res) => {
@@ -60,4 +58,21 @@ exports.addBook = (req, res) => {
 exports.getImageBook = (req, res) => {
     const fileName = req.params.fileName
     res.sendFile( path.join(__dirname, '../../uploads/', fileName) )
+}
+
+exports.deleteBooks = (req, res) => {
+    const{ idBook } =  req.params
+
+    if(!idBook){
+        util.send(res, 404, false, 'Id book cannot blank !', null)
+        return
+    }
+
+    const deleteBook = bookService.deleteBook(idBook)
+    if(deleteBook === 'not_found'){
+        util.send(res, 404, false, 'Id book not found !', null)
+        return
+    }
+
+    util.send(res, 201, true, 'Success delete book !', null);
 }
