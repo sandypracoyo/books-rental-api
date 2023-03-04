@@ -1,23 +1,24 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config({ path: '.env' });
 const util = require('../utils/utils');
-const { ACCESS_TOKEN_SECRET_KEY } = process.env
+require('dotenv').config({ path: '.env' });
 const database = require('../database.json');
+const { ACCESS_TOKEN_SECRET_KEY } = process.env
+const { DATA_CANNOT_BLANK, TOKEN_EXPIRED, INVALID_TOKEN } = require('../utils/response');
 
 const authentication = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]
     if(!token){
-        util.send(res, 401, false, 'Token cannot blank !', null)
+        util.send(res, DATA_CANNOT_BLANK('Token'), null)
         return
     }
     jwt.verify(token, ACCESS_TOKEN_SECRET_KEY, function(err, decoded){
         if(err){
             if(err.name === 'TokenExpiredError'){
-                util.send(res, 401, false, 'Token is expired !', null)
+                util.send(res, TOKEN_EXPIRED, null)
                 return
             }
-            util.send(res, 401, false, 'Invalid Token !', null)
+            util.send(res, INVALID_TOKEN, null)
             return
         }
 
@@ -25,7 +26,7 @@ const authentication = (req, res, next) => {
         const findUser = database.users.find((e) => e.id === idUser);
 
         if(!findUser){
-            util.send(res, 401, false, 'Invalid token !', null);
+            util.send(res, INVALID_TOKEN, null);
             return
         }
         req.userId = decoded.id;

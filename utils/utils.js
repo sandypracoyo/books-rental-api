@@ -10,18 +10,14 @@ exports.saveToDatabase = (DB) => {
     fs.writeFileSync('database.json', JSON.stringify(DB, null, 2), { encoding: 'utf-8'});
 };
 
-exports.send = (res, status, success, message, data) => {
-    let payload = {}
-    if(success === true){
-        payload.success = true
-        payload.message = message ? message : 'Success'
-        payload.data = data === null ? {} : data
-    }else {
-        payload.success = false
-        payload.message = message === null ? 'Internal Server Error' : message
-        payload.data = data === null ? {} : data
-    }
-    return res.status(status).json(payload)
+exports.send = (res, response, data) => {
+    const { status, success, message} = response
+    return res.status(status).json({
+        status,
+        success,
+        message,
+        data: data ? data : {}
+    })
 }
 
 exports.generateToken = (user) => {

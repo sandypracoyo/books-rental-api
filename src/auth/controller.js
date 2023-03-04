@@ -1,9 +1,9 @@
-
-const userService = require('./service');
 const bcrypt = require('bcryptjs');
 const util = require('../../utils/utils');
-require('dotenv').config({ path: '.env' });
 const jwt = require('jsonwebtoken');
+require('dotenv').config({ path: '.env' });
+const userService = require('./service');
+const { DATA_CANNOT_BLANK, INCORRECT_FIELD, FALSE_DATA, SUCCESS, INTERNAL_SERVER_ERROR, INVALID_TOKEN } = require('../../utils/response');
 const { REFRESH_TOKEN_SECRET_KEY } = process.env
 
 exports.login = (req, res) => {
@@ -11,28 +11,29 @@ exports.login = (req, res) => {
         const { username, password } = req.body
 
         if(!username || !password){
-            util.send(res, 403, false, 'Username or Password cannot blank !', null);
+            util.send(res, DATA_CANNOT_BLANK('Username or Password'), null);
             return
         }
 
         const user = userService.getUserByUsername(username);
 
         if(!user){
-            util.send(res, 403, false, 'Username or password incorrect', null);
+            util.send(res, INCORRECT_FIELD('Username'), null);
             return
         }
 
         if(!bcrypt.compareSync(password, user.password)){
-            util.send(res, 403, false, 'Password is false !', null)
+            util.send(res, FALSE_DATA('Password'), null);
             return
         }
 
         const token = util.generateToken(user);
         userService.saveRefreshToken(user.id, token.refreshToken);
-        util.send(res, 200, true, 'Success login', token);
+
+        util.send(res, SUCCESS('Success login !'), token);
     } catch (error) {
         console.log(error);
-        util.send(res, 500, false, null, null);
+        util.send(res, INTERNAL_SERVER_ERROR, null);
     }
 }
 
@@ -40,13 +41,13 @@ exports.refreshToken = (req, res) => {
     try {
         const { refreshToken } = req.body
         if(!refreshToken){
-            util.send(res, 403, false, 'Token cannot blank !', null)
+            util.send(res, DATA_CANNOT_BLANK('Token'), null)
             return
         }
     
         jwt.verify(refreshToken, REFRESH_TOKEN_SECRET_KEY, function(err, decoded){
             if(err){
-                util.send(res, 403, false, 'Token invalid !', null);
+                util.send(res, INVALID_TOKEN, null);
                 return
             }
     
@@ -54,16 +55,16 @@ exports.refreshToken = (req, res) => {
             const findRefreshToken = userService.getUserByUsername(user);
     
             if(!findRefreshToken || findRefreshToken.refreshToken !== refreshToken){
-                util.send(res, 403, false, 'Token invalid !', null);
+                util.send(res, INVALID_TOKEN, null);
                 return
             }
     
             const token = util.refreshToken(id, user)
-            util.send(res, 200, true, null, { accessToken: token })
+            util.send(res, SUCCESS('Sucess refresh token !'), { accessToken: token })
         })        
     } catch (error) {
         console.log(error);
-        util.send(res, 500, false, 'Internal server error', null)
+        util.send(res, INTERNAL_SERVER_ERROR, null)
     }
 }
 
@@ -76,9 +77,9 @@ exports.logout = (req, res) => {
             util.send(res, 403, false, 'Already logout !');
             return
         }
-        util.send(res, 200, true, 'Success logout', null);
+        util.send(res, SUCCESS('Logout'), null);
     } catch (error) {
         console.log(error);
-        util.send(res, 500, false, 'Internal server error', null)
+        util.send(res, INTERNAL_SERVER_ERROR, null)
     }
 }

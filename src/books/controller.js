@@ -1,11 +1,12 @@
 const util = require('../../utils/utils');
 const path = require('path');
 const bookService = require('./service');
+const { SUCCESS_RETRIEVE_DATA, DATA_CANNOT_BLANK, SUCCESS, NOT_FOUND } = require('../../utils/response');
 
 exports.getBooks = (req, res) => {
     const { page, limit } = req.query
     const dataBooks = bookService.getBooks(page, limit)
-    util.send(res, 200, true, 'Success retrieve books', dataBooks);
+    util.send(res, SUCCESS_RETRIEVE_DATA, dataBooks);
 }
 
 exports.addBook = (req, res) => {
@@ -13,32 +14,32 @@ exports.addBook = (req, res) => {
     const { isbn, title, sinopsis, genre, qty } = req.body
 
     if(!filename){
-        res.send('file tidak boleh kosong !')
+        util.send(res, DATA_CANNOT_BLANK('Filename'), null)
         return
     }
 
     if(!isbn){
-        res.send('isbn tidak boleh kosong !')
+        util.send(res, DATA_CANNOT_BLANK('Isbn'), null)
         return
     }
 
     if(!title){
-        res.send('title tidak boleh kosong !')
+        util.send(res, DATA_CANNOT_BLANK('Title'), null)
         return
     }
 
     if(!sinopsis){
-        res.send('file tidak boleh kosong !')
+        util.send(res, DATA_CANNOT_BLANK('Sinopsis'), null)
         return
     }
 
     if(!genre){
-        res.send('genre tidak boleh kosong !')
+        util.send(res, DATA_CANNOT_BLANK('Genre'), null)
         return
     }
 
     if(!qty){
-        res.send('qty tidak boleh kosong !')
+        util.send(res, DATA_CANNOT_BLANK('Qty'), null)
         return
     }
 
@@ -52,7 +53,7 @@ exports.addBook = (req, res) => {
     }
 
     bookService.saveBooks(dataToSave);
-    res.send('success')
+    util.send(res, SUCCESS('Add books'), null);
 }
 
 exports.getImageBook = (req, res) => {
@@ -64,15 +65,15 @@ exports.deleteBooks = (req, res) => {
     const{ idBook } =  req.params
 
     if(!idBook){
-        util.send(res, 404, false, 'Id book cannot blank !', null)
+        util.send(res, DATA_CANNOT_BLANK('Id book'), null)
         return
     }
 
     const deleteBook = bookService.deleteBook(idBook)
     if(deleteBook === 'not_found'){
-        util.send(res, 404, false, 'Id book not found !', null)
+        util.send(res, NOT_FOUND(`Id book ${idBook}`), null)
         return
     }
 
-    util.send(res, 201, true, 'Success delete book !', null);
+    util.send(res, SUCCESS('Delete book'), null);
 }
