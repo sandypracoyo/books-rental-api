@@ -1,19 +1,22 @@
+require('dotenv').config({ path: '.env' });
 const bcrypt = require('bcryptjs');
 const util = require('../../utils/utils');
 const jwt = require('jsonwebtoken');
-require('dotenv').config({ path: '.env' });
 const userService = require('./service');
 const { DATA_CANNOT_BLANK, INCORRECT_FIELD, FALSE_DATA, SUCCESS, INTERNAL_SERVER_ERROR, INVALID_TOKEN } = require('../../utils/response');
+const { validationResult } = require('express-validator');
 const { REFRESH_TOKEN_SECRET_KEY } = process.env
 
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
     try {
-        const { username, password } = req.body
-
-        if(!username || !password){
-            util.send(res, DATA_CANNOT_BLANK('Username or Password'), null);
-            return
+        const errors = validationResult(req)
+        if(!errors.isEmpty()){
+            const error = new Error('Error validation')
+            error.status = 400
+            error.data = errors.array()
+            throw error
         }
+        const { username, password } = req.body
 
         const user = userService.getUserByUsername(username);
 
@@ -32,8 +35,9 @@ exports.login = (req, res) => {
 
         util.send(res, SUCCESS('Success login !'), token);
     } catch (error) {
-        console.log(error);
-        util.send(res, INTERNAL_SERVER_ERROR, null);
+        next(error)
+        // console.log(error);
+        // util.send(res, INTERNAL_SERVER_ERROR, null);
     }
 }
 
