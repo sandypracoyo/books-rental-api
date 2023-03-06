@@ -2,6 +2,7 @@ const express = require('express');
 const auth = require('../../middlewares/authentication');
 const router = express.Router();
 const multer = require('multer');
+const { validateAddBook } = require('../../middlewares/validation');
 const { getBooks, addBook, getImageBook, deleteBooks } = require('./controller');
 
 const storage = multer.diskStorage({
@@ -20,7 +21,7 @@ const upload = multer({ storage: storage });
 router
     .get('/', auth, getBooks)
     .get('/image/:fileName', getImageBook)
-    .post('/', auth, upload.single('file'), addBook)
+    .post('/', auth, validateAddBook, upload.single('file'), addBook)
     .delete('/:idBook', deleteBooks)
     
 

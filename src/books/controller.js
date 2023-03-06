@@ -1,59 +1,43 @@
 const util = require('../../utils/utils');
 const path = require('path');
 const bookService = require('./service');
+const Err = require('../../utils/err');
+const { validationResult } = require('express-validator');
 const { SUCCESS_RETRIEVE_DATA, DATA_CANNOT_BLANK, SUCCESS, NOT_FOUND } = require('../../utils/response');
 
 exports.getBooks = (req, res) => {
-    const { page, limit } = req.query
-    const dataBooks = bookService.getBooks(page, limit)
-    util.send(res, SUCCESS_RETRIEVE_DATA, dataBooks);
+    try {
+        const { page, limit } = req.query
+        const dataBooks = bookService.getBooks(page, limit)
+        util.send(res, SUCCESS_RETRIEVE_DATA, dataBooks);
+    } catch (error) {
+        next(error)
+    }
 }
 
 exports.addBook = (req, res) => {
-    const filename = req.file.filename
-    const { isbn, title, sinopsis, genre, qty } = req.body
-
-    if(!filename){
-        util.send(res, DATA_CANNOT_BLANK('Filename'), null)
-        return
+    try {
+        const filename = req.file.filename
+        const { isbn, title, sinopsis, genre, qty } = req.body
+        const errors = validationResult(req)
+        if(!errors.isEmpty()){
+            throw new Err(400, IS_EMPTY('Some field'), errors.array())
+        }
+    
+        const dataToSave = {
+            isbn: isbn,
+            title: title,
+            imageAsset: `http://localhost:3000/books/image/${filename}`,
+            sinopsis: sinopsis,
+            genre: genre,
+            qty: parseInt(qty)
+        }
+    
+        bookService.saveBooks(dataToSave);
+        util.send(res, SUCCESS('Add books'), null);
+    } catch (error) {
+        next(error)
     }
-
-    if(!isbn){
-        util.send(res, DATA_CANNOT_BLANK('Isbn'), null)
-        return
-    }
-
-    if(!title){
-        util.send(res, DATA_CANNOT_BLANK('Title'), null)
-        return
-    }
-
-    if(!sinopsis){
-        util.send(res, DATA_CANNOT_BLANK('Sinopsis'), null)
-        return
-    }
-
-    if(!genre){
-        util.send(res, DATA_CANNOT_BLANK('Genre'), null)
-        return
-    }
-
-    if(!qty){
-        util.send(res, DATA_CANNOT_BLANK('Qty'), null)
-        return
-    }
-
-    const dataToSave = {
-        isbn: isbn,
-        title: title,
-        imageAsset: `http://localhost:3000/books/image/${filename}`,
-        sinopsis: sinopsis,
-        genre: genre,
-        qty: parseInt(qty)
-    }
-
-    bookService.saveBooks(dataToSave);
-    util.send(res, SUCCESS('Add books'), null);
 }
 
 exports.getImageBook = (req, res) => {

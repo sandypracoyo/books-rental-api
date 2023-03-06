@@ -1,7 +1,9 @@
-exports.DONT_HAVE_PERMISSION = {
-    status: 401,
-    success: false,
-    message: 'You dont have permission !'
+exports.IS_EMPTY = (data) => {
+    return `${data} is empty`
+}
+
+exports.IS_FALSE = (data) => {
+    return `${data} is false`
 }
 
 exports.SUCCESS_RETRIEVE_DATA = {
@@ -18,27 +20,19 @@ exports.SUCCESS = (data) => {
     }
 }
 
+exports.DONT_HAVE_PERMISSION = {
+    status: 401,
+    success: false,
+    message: 'You dont have permission !'
+}
+
+
+
 exports.INCORRECT_FIELD = (data) => {
     return {
         status: 401,
         success: false,
         message: `${data} is incorrect !`
-    }
-}
-
-exports.FALSE_DATA = (data) => {
-    return {
-        status: 401,
-        success: false,
-        message: `${data} is false !`
-    }
-}
-
-exports.NOT_FOUND = (data) => {
-    return {
-        status: 404,
-        success: false,
-        message: `${data} not found !`
     }
 }
 
@@ -54,13 +48,6 @@ exports.TOKEN_EXPIRED = {
     message: 'Token is expired !'
 }
 
-exports.DATA_CANNOT_BLANK = (data) => {
-    return {
-        status: 401,
-        success: false,
-        message: `${data} cannot blank !`
-    }
-}
 
 exports.INTERNAL_SERVER_ERROR = {
     status: 500,

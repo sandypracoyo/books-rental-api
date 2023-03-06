@@ -1,6 +1,18 @@
-const { body, check } = require('express-validator')
+const { body } = require('express-validator')
 
 exports.validateLogin = [
-    body('username').isLength({ min: 3 }).withMessage('Username tidak boleh kosong'),
-    body('password').isLength({ min: 3 }).withMessage('Password tidak boleh kosong')
+    body('username').not().isEmpty().withMessage('Username is empty'),
+    body('password').not().isEmpty().withMessage('Password is empty')
+]
+
+exports.validateRefreshToken = [
+    body('refreshToken').not().isEmpty().withMessage('Token tidak boleh kosong')
+]
+
+exports.validateAddBook = [
+    body('isbn').not().isEmpty().withMessage('Isbn is empty'),
+    body('title').not().isEmpty().withMessage('Title  is empty'),
+    body('sinopsis').not().isEmpty().withMessage('Sinopsis is empty'),
+    body('genre').not().isEmpty().withMessage('Genre is empty'),
+    body('qty').not().isEmpty().withMessage('Qty is empty')
 ]

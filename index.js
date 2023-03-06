@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const { errorMiddleware } = require('./middlewares/error');
+const { logInfo } = require('./utils/log');
 const authRouter = require('./src/auth/router');
 const bookRouter = require('./src/books/router');
 const userRouter = require('./src/users/router');
@@ -37,5 +38,5 @@ app.delete('*', (req,res)=>{
 
 
 app.listen(port, () => {
-    console.log(`APP RUNNING AT : ${port}`);
+    logInfo('Service running at port : 3000')
 });

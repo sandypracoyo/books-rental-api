@@ -1,16 +1,15 @@
 exports.errorMiddleware = (error, req, res, next) => {
-    const errorStatus = error.status || 500
-    const errorMessage = error.message
-    const errorData = error.data
-    console.log({
-        errorStatus,
-        errorMessage,
-        errorData
-    });
+    const errorStatus = error.statusCode || 500
+    const errorMessage = errorStatus === 500 ? 'Internal server error' : error.message
+    const errorData = error.data ? error.data : null
+
+    if(errorStatus === 500) {
+        console.log('Error : '+error);
+    }
 
     res.status(errorStatus).json({
         success: false,
         message: errorMessage,
-        data: errorData
+        data: errorData === null ? {} : errorData
     })
 }
