@@ -41,23 +41,31 @@ exports.addBook = (req, res) => {
 }
 
 exports.getImageBook = (req, res) => {
-    const fileName = req.params.fileName
-    res.sendFile( path.join(__dirname, '../../uploads/', fileName) )
+    try {
+        const fileName = req.params.fileName
+        res.sendFile( path.join(__dirname, '../../uploads/', fileName) )
+    } catch (error) {
+        next(error)
+    }
 }
 
 exports.deleteBooks = (req, res) => {
-    const{ idBook } =  req.params
+    try {
+        const{ idBook } =  req.params
 
-    if(!idBook){
-        util.send(res, DATA_CANNOT_BLANK('Id book'), null)
-        return
+        if(!idBook){
+            util.send(res, DATA_CANNOT_BLANK('Id book'), null)
+            return
+        }
+    
+        const deleteBook = bookService.deleteBook(idBook)
+        if(deleteBook === 'not_found'){
+            util.send(res, NOT_FOUND(`Id book ${idBook}`), null)
+            return
+        }
+    
+        util.send(res, SUCCESS('Delete book'), null);
+    } catch (error) {
+        next(error)
     }
-
-    const deleteBook = bookService.deleteBook(idBook)
-    if(deleteBook === 'not_found'){
-        util.send(res, NOT_FOUND(`Id book ${idBook}`), null)
-        return
-    }
-
-    util.send(res, SUCCESS('Delete book'), null);
 }

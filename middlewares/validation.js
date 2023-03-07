@@ -16,3 +16,7 @@ exports.validateAddBook = [
     body('genre').not().isEmpty().withMessage('Genre is empty'),
     body('qty').not().isEmpty().withMessage('Qty is empty')
 ]
+
+exports.validateTransaction = [
+    
+]

@@ -39,9 +39,36 @@
       "imageAsset": "http://localhost:3000/books/image/file-1677859440163-911807268.jpeg",
       "sinopsis": "lorem ipsum",
       "genre": "teknologi",
-      "qty": 3,
+      "qty": -1,
       "createdAt": "2023-03-03T16:04:00.175Z",
       "updatedAt": "2023-03-03T16:04:00.175Z"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "_PHBIJnuTU9CJMGOvPw",
+      "idUser": "5IvZ_P51voeDxXQPHA",
+      "transaction": [
+        {
+          "idBook": "0Xlfon7Mt4XXNKDatvj",
+          "title": "Dasar pemrograman php",
+          "qty": 15
+        }
+      ],
+      "transactionDate": "2023-03-07T15:20:04.252Z"
+    },
+    {
+      "id": "X74vPCIiVIA4p3OeHJe",
+      "idUser": "5IvZ_P51voeDxXQPHA",
+      "transaction": [
+        {
+          "idBook": "0Xlfon7Mt4XXNKDatvj",
+          "title": "Dasar pemrograman php",
+          "qty": 1
+        }
+      ],
+      "isLendingActive": true,
+      "transactionDate": "2023-03-07T15:24:52.732Z"
     }
   ]
 }

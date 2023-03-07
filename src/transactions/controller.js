@@ -3,15 +3,11 @@ const transactionService = require('./service');
 const { DATA_CANNOT_BLANK, SUCCESS } = require('../../utils/response');
 
 exports.transactions = (req, res) => {
-    const { idUser, books } = req.body
-    if(!idUser){
-        util.send(res, DATA_CANNOT_BLANK('Id user'), null)
-        return
+    try {
+        const { idUser, books } = req.body
+        transactionService.addTransaction(idUser, books)
+        util.send(res, SUCCESS('Path url transaction'), null);
+    } catch (error) {
+        next(error)
     }
-    if(!books){
-        util.send(res, DATA_CANNOT_BLANK('Books'), null)
-        return
-    }
-    const saveTransaction = transactionService.addTransaction(idUser, books);
-    util.send(res, SUCCESS('Path url transaction'), null);
 }
