@@ -1,37 +1,45 @@
 const userService = require('./service');
 const bcrypt = require('bcryptjs');
+const Err = require('../../utils/err');
 const util = require('../../utils/utils');
+const { validationResult } = require('express-validator');
+const { IS_EMPTY, IS_EXIST, SUCCESS } = require('../../utils/response');
 
-const register = (req, res) => {
-    const { username, password } = req.body
-    if(!username || !password){
-        res.send('Username or password field cannot blank !');
-        return
-    }
-    const salt = bcrypt.genSaltSync(10)
-    const newUser = {
-        username: username,
-        password: bcrypt.hashSync(password, salt)
-    }
+const register = (req, res, next) => {
     try {
+        const errors = validationResult(req)
+        if(!errors.isEmpty()){
+            throw new Err(400, IS_EMPTY('Username or Password'), errors.array())
+        }
+        const { username, password } = req.body
+        const salt = bcrypt.genSaltSync(10)
+
+        const newUser = {
+            username: username,
+            password: bcrypt.hashSync(password, salt)
+        }
+
         const createNewUser = userService.createNewUser(newUser);
         if(createNewUser === 'already_exist'){
-            util.send(res, 409, false, `Username ${newUser.username} is already exist !`, null);
-            return
+            throw new Err(409, IS_EXIST(`Username ${newUser.username}`))
         }
-        util.send(res, 201, true, 'Success register user !', null);
+        util.send(res, SUCCESS('Success register user !'), null);
     } catch (error) {
-        util.send(res, 500, false, 'Internal Server Error', null);
+        next(error)
     }
 }
 
-const deleteUser = (req, res) => {
-    const deleteUser = userService.deleteUser(req.params.id);
-    if(deleteUser === 'not_found'){
-        util.send(res, 401, false, 'Id user not found !', null)
-        return
+const deleteUser = (req, res, next) => {
+    try {
+        const deleteUser = userService.deleteUser(req.params.id);
+        if(deleteUser === 'not_found'){
+            util.send(res, 401, false, 'Id user not found !', null)
+            return
+        }
+        util.send(res, 201, true, 'Success delete data !', null);
+    } catch (error) {
+        next(error)
     }
-    util.send(res, 201, true, 'Success delete data !', null);
 }
 
 module.exports = {

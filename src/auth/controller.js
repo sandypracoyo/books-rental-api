@@ -10,7 +10,7 @@ const { REFRESH_TOKEN_SECRET_KEY } = process.env
 
 exports.login = (req, res, next) => {
     try {
-        const errors = validationResult(req).s
+        const errors = validationResult(req)
         if(!errors.isEmpty()){
             throw new Err(400, IS_EMPTY('Username or Password'), errors.array())
         }

@@ -6,6 +6,10 @@ exports.IS_FALSE = (data) => {
     return `${data} is false`
 }
 
+exports.IS_EXIST = (data) => {
+    return `${data} already exist`
+}
+
 exports.SUCCESS_RETRIEVE_DATA = {
     status: 200,
     success: true,

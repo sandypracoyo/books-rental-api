@@ -3,7 +3,7 @@ const nanoid = require('nanoid');
 
 const createNewUser = (newUser) => {
     const newUserCreate = {
-        id: nanoid(18),
+        idUser: nanoid(18),
         ...newUser,
         createdAt: new Date(),
         updatedAt : new Date()

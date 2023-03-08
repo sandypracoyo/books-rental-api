@@ -20,3 +20,8 @@ exports.validateAddBook = [
 exports.validateTransaction = [
     
 ]
+
+exports.validateRegister = [
+    body('username').not().isEmpty().withMessage('Username is empty'),
+    body('password').not().isEmpty().withMessage('Password is empty')
+]

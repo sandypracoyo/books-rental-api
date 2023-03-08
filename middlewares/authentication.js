@@ -12,7 +12,7 @@ const authentication = (req, res, next) => {
         util.send(res, DATA_CANNOT_BLANK('Token'), null)
         return
     }
-    jwt.verify(token, ACCESS_TOKEN_SECRET_KEY, function(err, decoded){
+    jwt.verify(token, ACCESS_TOKEN_SECRET_KEY, (err, decoded) =>{
         if(err){
             if(err.name === 'TokenExpiredError'){
                 util.send(res, TOKEN_EXPIRED, null)
@@ -23,7 +23,7 @@ const authentication = (req, res, next) => {
         }
 
         const idUser = decoded.id
-        const findUser = database.users.find((e) => e.id === idUser);
+        const findUser = database.users.find((e) => e.idUser === idUser);
 
         if(!findUser){
             util.send(res, INVALID_TOKEN, null);
