@@ -42,7 +42,17 @@ const deleteUser = (req, res, next) => {
     }
 }
 
+const getAllUser = (req, res, next) => {
+    try {
+        const dataUser = userService.getAllUser()
+        util.send(res, SUCCESS('Get data user'), dataUser);
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     register,
+    getAllUser,
     deleteUser
 }

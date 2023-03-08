@@ -27,7 +27,7 @@ exports.login = (req, res, next) => {
         }
 
         const token = util.generateToken(user);
-        userService.saveRefreshToken(user.id, token.refreshToken);
+        userService.saveRefreshToken(user.idUser, token.refreshToken);
 
         util.send(res, SUCCESS('Success login !'), token);
     } catch (error) {

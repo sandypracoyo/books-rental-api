@@ -20,7 +20,21 @@ const deleteUser = (id) => {
     return database.deleteUser(id);
 }
 
+const getAllUser = () => {
+    const dataUser = database.getAllUser()
+    const data = dataUser.map((e) => {
+        return {
+            idUser: e.idUser,
+            username: e.username,
+            createdAt: e.createdAt,
+            updatedAt: e.updatedAt
+        }
+    })
+    return data
+}
+
 module.exports = {
     createNewUser,
+    getAllUser,
     deleteUser
 }

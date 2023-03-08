@@ -22,12 +22,12 @@ exports.send = (res, response, data) => {
 
 exports.generateToken = (user) => {
     const token = jwt.sign({
-        id : user.id,
+        idUser : user.idUser,
         user: user.username
     }, ACCESS_TOKEN_SECRET_KEY, { expiresIn: '3h' });
 
     const refreshToken = jwt.sign({
-        id: user.id, 
+        idUser: user.id, 
         user: user.username
     }, REFRESH_TOKEN_SECRET_KEY);
 

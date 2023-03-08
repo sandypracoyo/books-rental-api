@@ -22,9 +22,8 @@ const authentication = (req, res, next) => {
             return
         }
 
-        const idUser = decoded.id
+        const idUser = decoded.idUser
         const findUser = database.users.find((e) => e.idUser === idUser);
-
         if(!findUser){
             util.send(res, INVALID_TOKEN, null);
             return

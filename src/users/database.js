@@ -15,6 +15,10 @@ const createNewUser = (newUser) => {
     }
 }
 
+const getAllUser = () => {
+    return database.users
+}
+
 const deleteUser = (id) => {
     const findUserDelete = database.users.findIndex((e) => e.id === id);
     if(findUserDelete === -1){
@@ -27,5 +31,6 @@ const deleteUser = (id) => {
 
 module.exports = {
     createNewUser,
+    getAllUser,
     deleteUser
 }
