@@ -1,6 +1,6 @@
+require('dotenv').config({ path: '.env' });
 const fs = require('fs');
 const { dirname } = require('path');
-require('dotenv').config({ path: '.env' });
 const jwt = require('jsonwebtoken');
 
 const { ACCESS_TOKEN_SECRET_KEY, REFRESH_TOKEN_SECRET_KEY } = process.env
